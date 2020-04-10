@@ -9,7 +9,6 @@ public class ProdutoResourceException extends Exception {
 
 	public ProdutoResourceException() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ProdutoResourceException(String message, Throwable cause, boolean enableSuppression,
