@@ -1,0 +1,37 @@
+------ ** API PRODUTOS ** ------
+
+Pacotes:
+	/com.summit.api -> contém o .java para iniciar a aplicação Spring Boot
+	
+	/com.summit.api -> contém o .java onde estão alocados os métodos GET/POST/PUT/DELETE (
+	 - metodo GET -> /produtos -> retorna um lista e todos os produtos armazenados no banco de dados.
+	 - metodo GET -> /produto/id/{id} -> retorna o produto de acordo com o ID passado como parâmetro. OBS: caso o produto exista 	 apenas.
+	 - metodo POST -> /produto/save -> faz a inserção de um novo regitro de produto no banco de dados. OBS: a inserção deve seguir 	a seguinte estrutura:
+		{
+			"codigo_produto": tipo string,
+       			"descricao_produto": tipo string,
+        		"preco_produto": tipo string,
+        		"quantidade_produto": tipo string,
+        		"unidade_produto": tipo string
+    		}
+	 - metodo PUT -> /produto/update/{id} -> faz a alteração em alguma campo do produto correspondente ao ID informado como 	 parâmetro. OBS: a estrutura do objeto passada para a realização do update deve seguir a mesma estrutura descrita no metodo 	 anterior.
+	)
+	
+	/com.summit.api.datasource.model -> contém o Produto.java que é a classe principal que define a estrutura do objeto Produto
+	
+	/com.summit.api.exception ->contém o ProdutoResourceException.java responsável lançar a exception caso alguma informação 		passada na hora de inserir o produto no banco seja inconsistente. Também contém o ProdutoNotFoundException responsável por 		lançar a exception caso não seja encontrado o ID do produto na hora da busca ou da deleção.
+
+	/com.summit.api.repository -> contem a interface que implementa os metodos do JpaRepository e que será utilizada nos services
+	
+	/com.summit.api.repository -> contem o .java responsável responsável por administrar a estrutura que será recebida como entrada 	de dados referente a um "objeto produto".
+	
+	/com.summit.api.service -> contém todos os .java responsáveis pelo "service" ou seja por realizarem as validações das regras de 	negócio bem como as operações de inserção, deleção, busca e update. Foi criado um .java chamado ProdutoConversor que terá a 	funcão de receber a estrutura enviada pelo usuário referente ao produto e transformá-lo em um objeto produto fazendo as devidas 	validações.
+
+ ** Regras de negócio **
+	- caso o preço seja < 0 o sistema automaticamente atribuirá 0 como preço do produto;
+	- caso a quantidade seja < 0 o sistema automaticamente atribuirá 0 como quantidade do produto;
+	- o preço fornecido pelo usuário deve conter apenas números. Caso contrário será retornado erro;
+	- a quantidade fornecida pelo usuário deverá conter apenas números. Caso contrário será retornado erro; 
+
+
+OBS FINAL: Acredito que todas as depencencias necessárias já estão incluídas no projeto. Utilizei como banco de dados o PostgreSQL. Todas as informações necessárias para acesso ao banco de dados estão dentro do "application.properties". Os softwares que utilizei para acessar o banco de dados foi o Pg Admin 4 e para acessar a API foi o Postman.
